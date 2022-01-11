@@ -2,7 +2,10 @@ const UserController = require('../controllers/user.controller');
 
 
 module.exports = (app) => {
-    app.get('/api', UserController.index);
-    app.post('/api/user', UserController.createUser);     
+    // register user route
+    app.post('/api/users/register', UserController.register);  
+    // login user routes
+    // register user routes 
+    app.post('/api/users/login', UserController.login);
 }
 
