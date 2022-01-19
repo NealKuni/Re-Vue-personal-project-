@@ -21,6 +21,21 @@ module.exports = {
                     user: newUser,
                 })
             })
+            // Possibly update the register method to immediately log them in as they register.
+            /*
+            .then(user => {
+                const userToken = jwt.sign({
+                    id: user._id
+                }, process.env.SECRET_KEY);
+ 
+            res.cookie("usertoken", userToken, secret, {
+                httpOnly: true
+                })
+                .json({ msg: "success!", user: user });
+            })
+            .catch(err => res.json(err));
+            }
+            */
             .catch((err) => {
                 console.log(err);
                 res.status(400).json(err);
@@ -45,7 +60,7 @@ module.exports = {
                                     process.env.JWT_SECRET),
                                     {
                                         httpOnly: true,
-                                        expires: new Date(Date.now() + 99999999999)
+                                        expires: new Date(Date.now() + 999999999)
                                     })
                                     .json({
                                         message: "Successfully logged in",
@@ -65,8 +80,12 @@ module.exports = {
             .catch((err) => {
                 res.status(400).json({ message: "Invalid Login Attempt - 4"})
             })
+    },
+    logout: (req, res) => {
+        console.log("logging out");
+        res.clearCookie("usertoken");
+        res.json({message: "you have successfully logged out of our system"});
     }
-
 }
 
  

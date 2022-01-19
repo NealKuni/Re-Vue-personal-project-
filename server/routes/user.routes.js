@@ -7,5 +7,7 @@ module.exports = (app) => {
     // login user routes
     // register user routes 
     app.post('/api/users/login', UserController.login);
+    app.post('/api/users/logout', UserController.logout);
+    
 }
 
