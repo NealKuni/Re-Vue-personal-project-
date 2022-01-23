@@ -1,16 +1,26 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 const cookieParser = require('cookie-parser');
+const multer = require("multer");
+const bodyParser = require('body-parser');
+
+
 
 app.use(cookieParser());
-// Change the app.use(cors()) to the one below
+app.use(bodyParser.json());
 app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 app.use(express.json());                           
 app.use(express.urlencoded({ extended: true }));   
-require('./config/mongoose.config');    
+
+app.use( "./uploads", express.static(__dirname +'/uploads'));
+
+
+require('./config/mongoose.config')(process.env.ATLAS_URI);    
 require('./routes/user.routes')(app);
+require('./routes/review.routes')(app);
     
-app.listen(8000, () => console.log("Listing on port 8000") );
+app.listen(process.env.DB_PORT, () => console.log(`Listing on port ${process.env.DB_PORT}`) );
 

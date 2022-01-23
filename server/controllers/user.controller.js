@@ -2,11 +2,6 @@ const User = require("../models/user.model");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-// module.exports.index = (request, response) => {  //We are exporting a key:val pair of index : function
-//     response.json({     // This is where we're setting the API's response to the requesting client
-//        message: "Hello World"
-//     });
-// }
 
 module.exports = {
     register: (req, res) => {
@@ -56,7 +51,7 @@ module.exports = {
                                     jwt.sign({
                                         _id: user._id,
                                         email: user.email
-                                    }, 
+                                    },  
                                     process.env.JWT_SECRET),
                                     {
                                         httpOnly: true,
@@ -85,7 +80,16 @@ module.exports = {
         console.log("logging out");
         res.clearCookie("usertoken");
         res.json({message: "you have successfully logged out of our system"});
-    }
-}
+    },
+
+    getLoggedInUser(req, res) {
+        const decodedJWT = jwt.decode(req.cookies.usertoken, {complete: true});
+
+        User.findById(decodedJWT.payload._id)
+            .then(user => res.json(user))
+            .catch(err =>res.json(err));
+
+    },
+};
 
  
