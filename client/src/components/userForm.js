@@ -94,7 +94,7 @@ const UserForm = () => {
             
         </div>
         <button type="submit" class="bi bi-upload mt-3 btn-primary" > Register</button>
-        
+    
         </form>
     </div>
         
