@@ -82,7 +82,7 @@ module.exports = {
         res.json({message: "you have successfully logged out of our system"});
     },
 
-    getLoggedInUser(req, res) {
+    getLoggedInUser: (req, res) => {
         const decodedJWT = jwt.decode(req.cookies.usertoken, {complete: true});
 
         User.findById(decodedJWT.payload._id)

@@ -5,7 +5,7 @@ const { upload } = require('../helpers/filehelper');
 
 
 module.exports = (app) => {
-    app.get('/api/review', ReviewController.getAll);
+    app.get('/api/', ReviewController.getAll);
     app.post('/api/review/post', [upload.single('image'), authenticate], ReviewController.post);
     app.get('/api/review/:id', ReviewController.getOne);
     app.put('/api/review/update/:id', [upload.single('image'), authenticate], ReviewController.update);

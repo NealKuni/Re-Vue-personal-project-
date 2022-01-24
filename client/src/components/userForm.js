@@ -9,36 +9,61 @@ const UserForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [fileName, setFileName] = useState("");
+    const [confirmReg, setConfirmReg] = useState("");
     const [errors, setErrors] = useState({});
 
     
     const onSubmitHandler = (e) => {
     
         e.preventDefault();
-        
-        axios.post('http://localhost:8000/api/user/register', {
+        const newUser = {
             firstName,   
             lastName,
             email,
             password,
-                
+            confirmPassword
+        }
+        axios.post('http://localhost:8000/api/users/register', 
+        newUser,
+        {
+          withCredentials: true
         })
-            .then(res=>{
-                console.log(res); 
-                console.log(res.data);
-            })
-            .catch((err) => {
-                console.log(err);
-                if (err.response.errors) {
-                    setErrors(err.response.errors);
-                } 
-            })
+      
+          .then((res) =>{
+              console.log(newUser)
+              console.log(res); 
+              console.log(res.data);
+              // add a navigate to the home page
+              setFirstName("");
+              setLastName("");
+              setEmail("");
+              setPassword("");
+              setConfirmPassword("");
+              setErrors({});
+              setConfirmReg("You have successfully registered.")
+          })
+          .catch((err) => {
+              console.log(err);
+              console.log(err.response.data.errors);
+              if (err.response.data.errors) {
+                  setErrors(err.response.data.errors);
+              } 
+              // add an else statement to add confirmPassword validation errors 
+          });
+
+    
+            
     }
+
     return (
         
     <div className="container">
-      <h5> Login </h5>
+      <h5 className=''> Register </h5>
+      {
+        confirmReg ?
+        <h6 style= {{color: "green"}}> {confirmReg} </h6>
+        : null
+      }
       <form className="d-flex justify-content-evenly border border-secondary p-3" onSubmit={ onSubmitHandler }>
         <div className="col-6">
             <label className="form-label">First Name:</label>
@@ -48,7 +73,11 @@ const UserForm = () => {
                   <p className="text-danger" > {errors.firstName.message} </p>
                   : null
               }
-              <input className="form-control" type="text" onChange={(e) => setFirstName(e.target.value)}/>
+              <input 
+              className="form-control" 
+              type="text"
+              value={firstName} 
+              onChange={(e) => setFirstName(e.target.value)}/>
             </div>
             
             <label className="form-label">Last Name:</label>
@@ -59,7 +88,11 @@ const UserForm = () => {
                   : null
               }
 
-              <input className="form-control" type="text" onChange={(e) => setLastName(e.target.value)}/>
+              <input 
+              className="form-control" 
+              type="text" 
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}/>
             </div>
 
             <label className="form-label">Email:</label>
@@ -69,7 +102,11 @@ const UserForm = () => {
                   <p className="text-danger" > {errors.email.message} </p>
                   : null
               }
-              <input className="form-control" type="text" onChange={(e) => setEmail(e.target.value)}/>
+              <input 
+              className="form-control" 
+              type="text" 
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}/>
             </div>
 
             <label className="form-label">Password:</label>
@@ -79,22 +116,29 @@ const UserForm = () => {
                   <p className="text-danger" > {errors.password.message} </p>
                   : null
               }
-              <input className="form-control" type="text" onChange={(e) => setPassword(e.target.value)}/>
-            </div>
-            <label className="form-label">Confirm Password:</label>
-            <div className="ptsb-3">
-              
-              <input className="form-control" type="text" onChange={(e) => setConfirmPassword(e.target.value)}/>
-              {
-                password === setConfirmPassword ?
-                  <p className="text-danger" > Passwords must match. </p>
-                  : null
-              }
+              <input 
+              className="form-control" 
+              type="password"
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)}/>
             </div>
             
+            <label className="form-label">Confirm Password:</label>
+            <div className="ptsb-3">
+                {
+                  errors.confirmPassword ?
+                    <p className="text-danger" > {errors.confirmPassword.message} </p>
+                      : null
+                }
+              <input 
+              className="form-control" 
+              type="password" 
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}/>
+              
+            </div>
+            <button type="submit" classN="bi bi-upload mt-3 btn-primary" > Register</button>
         </div>
-        <button type="submit" class="bi bi-upload mt-3 btn-primary" > Register</button>
-    
         </form>
     </div>
         
