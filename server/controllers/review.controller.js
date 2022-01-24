@@ -69,13 +69,25 @@ module.exports = {
     update: (req, res) => {
         console.log("inside update review")
         console.log("looking for id: " + req.params.id)
-        Review.findByIdAndUpdate(req.params.id, req.body, {
-            new: true,
-            runValidators: true,
-          })
+        Review.findById(req.params.id)             
             .then((updatedReview) => {
-              console.log(updatedReview);
-              res.json(updatedReview);
+                updatedReview.title = req.body.title;
+                updatedReview.location = req.body.location;
+                updatedReview.review = req.body.review;
+                updatedReview.image = req.file.originalname;
+
+                updatedReview.save()
+                .then(() => {
+                    console.log(updatedReview)
+                    res.json({
+                        updatedReview,
+                        message: "REVIEW HAS BEEN UPDATED"
+                    })
+                })
+                .catch((err) => {
+                    console.log(err);
+                    res.status(400).json(err);
+                })
             })
             .catch((err) => {
               console.log(err);
