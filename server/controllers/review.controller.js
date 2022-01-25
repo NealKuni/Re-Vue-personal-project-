@@ -14,10 +14,10 @@ module.exports = {
             location: req.body.location,
             review: req.body.review,
             image: req.file.originalname,
-            createdBy: null
+            createdBy: userId
         })
         
-        newReview.createdBy = userId;
+        // newReview.createdBy = userId;
         console.log(`file uploaded: ${req.file}`)
         console.log(newReview)
 
@@ -26,9 +26,7 @@ module.exports = {
                 console.log(review)
                 res.json({
                     review,
-                    message: "Successfuly created post",
-                    reviewID: review._id,
-                    payload: decodedJWT
+                    message: "Successfuly created post"
                 })
             })
             .catch((err) => {
@@ -55,6 +53,23 @@ module.exports = {
     getAll: (req,res) => {
         console.log("inside get all reviews");
         Review.find({})
+            .populate("createdBy", "firstName")
+            .then((allReviews) => {
+                console.log(allReviews);
+                res.json(allReviews);
+            })
+            .catch((err) => {
+                console.log(err);
+                res.status(400).json(err);
+            })
+    },
+
+    getAllByLoggedInUserId: (req,res) => {
+        const decodedJWT = jwt.decode(req.cookies.usertoken, { complete : true });
+        const userId = decodedJWT.payload._id;
+
+        console.log("inside get all reviews");
+        Review.find({createdBy: userId})
             .populate("createdBy", "firstName")
             .then((allReviews) => {
                 console.log(allReviews);

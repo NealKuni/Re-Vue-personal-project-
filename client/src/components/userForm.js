@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import axios from 'axios';
 import { navigate } from '@reach/router';
 
-const UserForm = () => {
-    
+const UserForm = (props) => {
+    const {updatedState, setUpdatedState} = props;
+
     const [firstName, setFirstName] = useState(""); 
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
@@ -41,6 +42,12 @@ const UserForm = () => {
               setConfirmPassword("");
               setErrors({});
               setConfirmReg("You have successfully registered.")
+              localStorage.setItem("userId", res.data.user._id )
+              // setUpdatedState(!updatedState)
+
+              // const userId = localStorage.getItem("userId") || "not logged in"
+            
+              // 
           })
           .catch((err) => {
               console.log(err);
@@ -48,7 +55,7 @@ const UserForm = () => {
               if (err.response.data.errors) {
                   setErrors(err.response.data.errors);
               } 
-              // add an else statement to add confirmPassword validation errors 
+             
           });
 
     
@@ -137,7 +144,7 @@ const UserForm = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}/>
               
             </div>
-            <button type="submit" classN="bi bi-upload mt-3 btn-primary" > Register</button>
+            <button type="submit" className="bi bi-upload mt-3" > Register</button>
         </div>
         </form>
     </div>

@@ -41,7 +41,8 @@ module.exports = {
         User.findOne({ email: req.body.email })
             .then((user) => {
                 if(user === null){
-                    res.status(400).json({ message: "Invalid Login Attempt - 1"})
+                    res.status(400).json({ message: "Invalid Login Attempt - 1"});
+                    
                 } else {
                     bcrypt.compare(req.body.password, user.password)
                         .then((isPasswordValid) => {
@@ -57,24 +58,28 @@ module.exports = {
                                         httpOnly: true,
                                         expires: new Date(Date.now() + 999999999)
                                     })
-                                    .json({
+                                    .json(
+                                        
+                                        {
                                         message: "Successfully logged in",
                                         userLoggedIn: {
                                             firstName: user.firstName,
                                         }
                                     })
+                                    
                             } else {
-                                res.status(400).json({ message: "Invalid Login Attempt - 2"})
+                                res.status(400).json({ message: "Invalid Login Attempt"})
                             }
                         })
                         .catch((err) => {
-                        res.status(400).json({ message: "Invalid Login Attempt - 3"})
+                        res.status(400).json({ message: "Invalid Login Attempt"})
                         })
                 }
             })
             .catch((err) => {
-                res.status(400).json({ message: "Invalid Login Attempt - 4"})
+                res.status(400).json({ message: "Invalid Login Attempt"})
             })
+            
     },
     logout: (req, res) => {
         console.log("logging out");
