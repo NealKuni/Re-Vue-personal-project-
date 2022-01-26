@@ -18,15 +18,17 @@ const GetAllReviews = () => {
 
     return(
         <div className='container'>
+            
             {allReviews.map((eachReview, index)=> {
                 return(
                     
                     <div  key={index}>
                         <div >
-                            { 
+                            <img src= {`/uploads/${eachReview.image}`} alt="..." style={
+                            {
+                            width: "50%"
+                            }}/>
                             
-                            }
-                            {eachReview.image}
                         </div>
                         <h6>{eachReview.title}</h6>
                         <span style={{color: "#36454F"}}>{eachReview.location}</span>
