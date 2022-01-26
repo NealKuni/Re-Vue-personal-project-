@@ -2,28 +2,37 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { navigate, Link } from '@reach/router';
 
+const GetAllUserReviews = (props) => {
+    const {reviews, setReviews } = props;
+    // const [allUserReviews, setAllUserReviews] = useState(reviews)
+    
 
-const GetAllReviews = () => {
+    const onDeleteReview = (reviewIdFromBelow) => {
 
-    const [allReviews, setAllReviews] = useState([])
-    useEffect(()=>{
-        axios.get('http://localhost:8000/api')
+        axios.delete('http://localhost:8000/api/review/delete/' + reviewIdFromBelow, 
+            { withCredentials: true}
+        )
             .then((res) => {
-                console.log(res.data)
-                setAllReviews(res.data);
+              console.log('inside delete method:' + (reviewIdFromBelow));
+            //   navigate("/");
+                let filterReviews = reviews.filter((oneReview) => {
+                    return oneReview._id !== reviewIdFromBelow
+                })
+                setReviews(filterReviews);
             })
-            .catch((err) =>{ 
-                console.log(err);
+            .catch((err) => {
+              console.log(err)
+              console.log('Error occured while during delete request')
             })
-    }, [])
+      };
 
-    return(
-        <div className='container'>
-            
-            {allReviews.map((eachReview, index)=> {
+  return (
+    <div className='container'>
+        {reviews.map((eachReview, index)=> {
                 return(
-                    
+                <div>
                     <div  key={index}>
+                        
                         <div >
                             <img src= {`/uploads/${eachReview.image}`} alt="..." style={
                             {
@@ -33,30 +42,30 @@ const GetAllReviews = () => {
                         </div>
                         <h2>{eachReview.title}</h2>
                         <span style={{color: "#36454F"}}> Location: {eachReview.location}</span>
-                        <br/>
-                        <span style={{color: "#36454F"}}> Posted By: {eachReview.createdBy.firstName} </span>
                         <p className='text-wrap'>{eachReview.review}</p>   
                         <div className='row my-5'>
-                            {/* <div className='col-sm-2'>
+                            <div className='col-sm-2'>
                                 <Link to={`/update/${eachReview._id}`}>
                                     <button className='btn btn-outline-sucess'> Update </button>
                                 </Link>
                             </div>
                             <div className='col-sm-2'>
-                                <button className='btn btn-outline-sucess'>Delete</button>
+                                <button className='btn btn-outline-sucess' onClick={(e) => onDeleteReview(eachReview._id)}>Delete</button>
                             </div>
                             <div>
                                 <hr/>
-                            </div> */}
+                            </div>
                         </div>
-
+                        
                     </div>  
+                </div>
                 )
             })
             }
-        </div>
-    )
+    </div>
+  )
 }
 
+export default GetAllUserReviews;
 
-export default GetAllReviews;
+

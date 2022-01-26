@@ -32,9 +32,12 @@ const Navbar = () =>{
                         <img src={logo} alt="logo"/>
                     </Link>     */}
                     <div>
-                        <button className="btn btn-outline-success me-2" onClick={() => navigate('/')}> Home </button>
+                        <button className="btn btn-sm btn-outline-secondary" onClick={() => navigate('/')}> Home </button>
+                        {/* <button className="btn btn-sm btn-outline-secondary"  onClick={() => navigate('/')}> About ReVue</button> */}
+                    </div>
+                    <div>
                         <button className="btn btn-sm btn-outline-secondary"  onClick={() => navigate('/review')}> Post a ReVue</button>
-                        <button className="btn btn-sm btn-outline-secondary"  onClick={() => navigate('/review')}> About ReVue</button>
+                        <button className="btn btn-sm btn-outline-secondary"  onClick={() => navigate('/myreviews')}> My ReVues</button>
                     </div>
                     <div>
                         <button className="btn btn-sm btn-outline-secondary"  onClick={() => navigate('/login')}> Login </button>

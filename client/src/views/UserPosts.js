@@ -1,18 +1,18 @@
 import React from 'react'
-import UserForm from '../components/UserForm';
 import styled from 'styled-components';
+import GetAllUserReviews from '../components/GetAllUserReviews';
 
+const UserPosts = (props) => {
+    const {reviews, setReviews} = props;
 
-
-const Registration = () => {
   return (
     <HomeContainer>
-      <UserForm/>
+        <GetAllUserReviews reviews={reviews} setReviews={setReviews}/>
     </HomeContainer>
   )
 }
 
-export default Registration;
+export default UserPosts;
 
 
 const HomeContainer = styled.div`

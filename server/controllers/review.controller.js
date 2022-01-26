@@ -71,6 +71,7 @@ module.exports = {
         const userId = decodedJWT.payload._id;
 
         console.log("inside get all reviews");
+        console.log(decodedJWT.payload)
         Review.find({createdBy: userId})
             .populate("createdBy", "firstName")
             .then((allReviews) => {
