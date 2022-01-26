@@ -65,7 +65,7 @@ const UserForm = (props) => {
     return (
         
     <div className="container">
-      <h5 className=''> Register </h5>
+      <h3 style={{color: "#7393B3"}}> Register </h3>
       {
         confirmReg ?
         <h6 style= {{color: "green"}}> {confirmReg} </h6>

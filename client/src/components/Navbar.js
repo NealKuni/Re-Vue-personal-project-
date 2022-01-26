@@ -15,25 +15,35 @@ const Navbar = () =>{
         .then((res) => {
             console.log(res.data);
             localStorage.clear()
-            // navigate('/') add a route to have the user navigate to the home page when they have logged out. 
+            navigate('/')
             
         })
         .catch(err => {
             console.log(err);
+            if (err.response.data.code === 401){
+                navigate('/login')
+            }
         });
     };
 
     return(
         <div className='container'>
             <nav className="navbar">
-                <form className="container-fluid justify-content-start">
+                <div className="container-fluid justify-content-between">
                     {/* <Link>
                         <img src={logo} alt="logo"/>
                     </Link>     */}
-                    <button className="btn btn-outline-success me-2" onClick={() => navigate('/')}> Home </button>
-                    <button className="btn btn-sm btn-outline-secondary"  onClick={() => navigate('/login')}> Login </button>
-                    <button className="btn btn-sm btn-outline-secondary"  onClick={(e) => logout(e)}> Logout</button>
-                </form>
+                    <div>
+                        <button className="btn btn-outline-success me-2" onClick={() => navigate('/')}> Home </button>
+                        <button className="btn btn-sm btn-outline-secondary"  onClick={() => navigate('/review')}> Post a ReVue</button>
+                        <button className="btn btn-sm btn-outline-secondary"  onClick={() => navigate('/review')}> About ReVue</button>
+                    </div>
+                    <div>
+                        <button className="btn btn-sm btn-outline-secondary"  onClick={() => navigate('/login')}> Login </button>
+                        <button className="btn btn-sm btn-outline-secondary"  onClick={(e) => logout(e)}> Logout</button>
+                    </div>
+
+                </div>
             </nav>
         </div>
     )

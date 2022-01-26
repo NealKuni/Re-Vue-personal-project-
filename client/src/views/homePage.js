@@ -1,19 +1,28 @@
 import React, { useState } from 'react'
-import axios from 'axios';
+
 import { navigate } from '@reach/router';
 import GetAllReviews from '../components/GetAllReviews';
-import Header from '../components/Header';
+import styled from 'styled-components';
 
 const HomePage = (props) => {
 
      
     return (
-        <div>
-            
+        <HomeContainer>
             <GetAllReviews/>
-        </div>
+        </HomeContainer>
         
     )
 }
 
 export default HomePage;
+
+const HomeContainer = styled.div`
+    margin: 7rem 0;
+    font-family: 'Poppins', sans-serif;
+    img {
+        width: 2rem;
+        display: block;
+        margin: 0 auto;
+    }
+`;

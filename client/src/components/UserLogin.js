@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios';
-import { navigate } from '@reach/router';
+import { navigate, Link } from '@reach/router';
 
 
 const UserLogin = (props) => {
@@ -22,15 +22,15 @@ const UserLogin = (props) => {
         { 
         withCredentials : true
         })
-        .then((response) =>{
+        .then((res) =>{
             console.log("successfully logged in");
-            console.log(response.data)
+            console.log(res.data)
 
-            // localStorage.setItem("userId", response.data.user._id)
+            // localStorage.setItem("userId", res.data.user._id)
             // setUpdatedState(!updatedState)
             
             // const userId = localStorage.getItem("userId") || "not logged in"
-            // navigate('/');  
+            navigate('/');  
         })
         .catch((err) => {
             console.log(err.response);
@@ -41,9 +41,9 @@ const UserLogin = (props) => {
     return(
 
         <div className="container">
-            <h3 className=''> Login </h3>
+            <h3 style={{color: "#7393B3"}}> Login </h3>
             
-            <form className="d-flex justify-content-evenly border border-secondary p-3" onSubmit={ onSubmitHandler }>
+            <form className="d-flex justify-content-evenly border p-3" onSubmit={ onSubmitHandler }>
                 <div className="col-6">
                     <label className="form-label">Email:</label>
                     <div className="ptsb-3">
@@ -74,11 +74,12 @@ const UserLogin = (props) => {
                 </div>
             </form>
             
-            <div className="d-flex justify-content-center border border-secondary p-3">
+            <div className="d-flex justify-content-center border p-3">
 
                     <p className='me-4'>Not a member yet? </p>
-                    <button className="bi bi-upload" >Sign Up</button>
-
+                    <Link to='/register'>
+                        <button className="bi bi-upload" >Sign Up</button>
+                    </Link>
             </div>
         </div>
         
