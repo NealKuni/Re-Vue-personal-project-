@@ -3,32 +3,43 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { navigate } from '@reach/router';
 
+
 const CreatePost = () => {
     const [title, setTitle] = useState('');
     const [location, setLocation] = useState('');
     const [review, setReview] = useState('');
     const [image, setImage] = useState('');
 
+    const onChangeImage = (e) =>{
+        setImage(e.target.files[0])
+    }
+
     const onSubmitHandler = (e) =>{
         e.preventDefault();
 
-        const newReview = {
-            title,
-            location,
-            review,
-            image
-        }
+        const formData = new FormData();
 
-        axios.post('http://localhost:8000/api/review/post', newReview,
+        formData.append("title", title);
+        formData.append("location", location);
+        formData.append("review", review);
+        formData.append("image", image);
+
+
+        axios.post('http://localhost:8000/api/review/post', 
+            formData,
         {
             withCredentials: true
         })
         .then((res)=>{
+            console.log(res)
             console.log("successfully created review")
+            navigate("/");
         })
         .catch((err) => {
             console.log(err)
-            navigate('/login')
+            if (err.response.data.code === 401){
+                navigate('/login')
+            }
         })
     }
 
@@ -36,7 +47,7 @@ const CreatePost = () => {
     <CreatePostContainer>
         <div className='container'>
             <h3 style={{color: "#7393B3"}}>ReVue your latest travel</h3>
-            <form className='border p-4' onSubmit={ onSubmitHandler }>
+            <form className='border p-4' onSubmit={ onSubmitHandler } encType="multipart/form-data">
                 <div className="mb-3">
                     <label className="form-label">Title</label>
                     <input type="text" className="form-control" onChange = {(e)=>setTitle(e.target.value)} placeholder='Title'/>
@@ -51,9 +62,9 @@ const CreatePost = () => {
                     <textarea className="form-control" rows="3" onChange = {(e)=>setReview(e.target.value)}></textarea>
                 </div>  
                
-                <div class="mb-3">
-                    <label class="form-label">Upload Photos</label>
-                    <input class="form-control form-control-sm" type="file" onChange = {(e)=>setImage(e.target.value)}/>
+                <div className="mb-3">
+                    <label className="form-label">Upload Photos</label>
+                    <input className="form-control form-control-sm" type="file" name="image" onChange = { onChangeImage }/>
                 </div>
                 <button type="submit" className="btn btn-primary">Submit Review</button>
             </form>

@@ -8,6 +8,7 @@ module.exports = {
         const decodedJWT = jwt.decode(req.cookies.usertoken, { complete : true });
         const userId = decodedJWT.payload._id;
 
+        
         // assign "createdBy" to userId. This is how we'll track which user created this review. 
         const newReview = new Review({
             title: req.body.title,
@@ -18,14 +19,14 @@ module.exports = {
         })
         
         // newReview.createdBy = userId;
-        console.log(`file uploaded: ${req.file}`)
+        console.log(`image uploaded: ${req.image}`)
         console.log(newReview)
 
         newReview.save()
             .then((review) => {
                 console.log(review)
                 res.json({
-                    review,
+                    review: review.image,
                     message: "Successfuly created post"
                 })
             })
@@ -90,7 +91,7 @@ module.exports = {
                 updatedReview.title = req.body.title;
                 updatedReview.location = req.body.location;
                 updatedReview.review = req.body.review;
-                updatedReview.image = req.file.originalname;
+                updatedReview.image = req.image.originalname;
 
                 updatedReview.save()
                 .then(() => {

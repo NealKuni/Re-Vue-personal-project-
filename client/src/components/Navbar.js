@@ -20,9 +20,7 @@ const Navbar = () =>{
         })
         .catch(err => {
             console.log(err);
-            if (err.response.data.code === 401){
-                navigate('/login')
-            }
+            
         });
     };
 
