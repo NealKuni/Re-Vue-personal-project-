@@ -92,7 +92,7 @@ module.exports = {
                 updatedReview.title = req.body.title;
                 updatedReview.location = req.body.location;
                 updatedReview.review = req.body.review;
-                updatedReview.image = req.image.originalname;
+                updatedReview.image = req.file.originalname;
 
                 updatedReview.save()
                 .then(() => {

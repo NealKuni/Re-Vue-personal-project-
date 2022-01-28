@@ -9,6 +9,11 @@ const HomePage = (props) => {
      
     return (
         <HomeContainer>
+            <div style={{color: "#7393B3"}} className='container'>
+                <h3>Revues From Around the Globe</h3>
+            </div>
+            <hr/>
+            
             <GetAllReviews reviews={reviews} setReviews={setReviews}/>
         </HomeContainer>
         

@@ -15,8 +15,7 @@ const Navbar = () =>{
         .then((res) => {
             console.log(res.data);
             localStorage.clear()
-            navigate('/')
-            
+            navigate('/login')
         })
         .catch(err => {
             console.log(err);

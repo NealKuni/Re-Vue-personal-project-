@@ -30,9 +30,7 @@ const GetAllUserReviews = (props) => {
     <div className='container'>
         {reviews.map((eachReview, index)=> {
                 return(
-                <div>
                     <div  key={index}>
-                        
                         <div >
                             <img src= {`/uploads/${eachReview.image}`} alt="..." style={
                             {
@@ -56,9 +54,8 @@ const GetAllUserReviews = (props) => {
                                 <hr/>
                             </div>
                         </div>
-                        
                     </div>  
-                </div>
+
                 )
             })
             }

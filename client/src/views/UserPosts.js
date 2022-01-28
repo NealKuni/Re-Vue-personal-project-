@@ -7,6 +7,10 @@ const UserPosts = (props) => {
 
   return (
     <HomeContainer>
+            <div style={{color: "#7393B3"}} className='container'>
+                <h3>My Reviews</h3>
+            </div>
+            <hr/>
         <GetAllUserReviews reviews={reviews} setReviews={setReviews}/>
     </HomeContainer>
   )

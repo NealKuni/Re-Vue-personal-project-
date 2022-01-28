@@ -5,7 +5,7 @@ import Header from './components/Header';
 import Login from './views/Login';
 import HomePage from './views/HomePage';
 import Footer from './components/Footer';
-import ViewPost from './views/ViewPost';
+import UpdatePost from './views/UpdatePost';
 import CreatePost from './views/CreatePost';
 import Registration from './views/Registration';
 import UserPosts from './views/UserPosts';
@@ -31,7 +31,7 @@ function App() {
       <Router>
         <HomePage path='/'reviews={reviews} setReviews={setReviews} />
         <Login path='/login' updatedState={updatedState} setUpdatedState={setUpdatedState}/>
-        <ViewPost path='/update/:id'/>
+        <UpdatePost path='/update/:id'/>
         <CreatePost path="/review"/>
         <Registration path='/register'/> 
         <UserPosts path='/myreviews' reviews={reviews} setReviews={setReviews}/>
