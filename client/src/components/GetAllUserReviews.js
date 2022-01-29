@@ -3,7 +3,7 @@ import axios from 'axios';
 import { navigate, Link } from '@reach/router';
 
 const GetAllUserReviews = (props) => {
-    const {reviews, setReviews } = props;
+    const { userReviews, setUserReviews } = props;
     // const [allUserReviews, setAllUserReviews] = useState(reviews)
     
 
@@ -15,10 +15,10 @@ const GetAllUserReviews = (props) => {
             .then((res) => {
               console.log('inside delete method:' + (reviewIdFromBelow));
             //   navigate("/");
-                let filterReviews = reviews.filter((oneReview) => {
+                let filterReviews = userReviews.filter((oneReview) => {
                     return oneReview._id !== reviewIdFromBelow
                 })
-                setReviews(filterReviews);
+                setUserReviews(filterReviews);
             })
             .catch((err) => {
               console.log(err)
@@ -28,7 +28,7 @@ const GetAllUserReviews = (props) => {
 
   return (
     <div className='container'>
-        {reviews.map((eachReview, index)=> {
+        {userReviews.map((eachReview, index)=> {
                 return(
                     <div  key={index}>
                         <div >

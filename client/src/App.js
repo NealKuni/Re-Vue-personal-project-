@@ -12,7 +12,8 @@ import UserPosts from './views/UserPosts';
 
 function App() {
   const [updatedState, setUpdatedState] = useState(false);
-  const [reviews, setReviews] = useState([])
+  const [reviews, setReviews] = useState([]);
+  const [userReviews, setUserReviews ] = useState([]);
 
   useEffect(()=>{
     axios.get('http://localhost:8000/api')
@@ -24,6 +25,17 @@ function App() {
             console.log(err);
         })
 }, [])
+useEffect(()=>{
+  axios.get('http://localhost:8000/api/review/user', {withCredentials: true})
+      .then((res) => {
+          console.log(res.data)
+          setUserReviews(res.data);
+      })
+      .catch((err) =>{ 
+          console.log(err);
+      })
+}, [])
+
 
   return (
     <div className="App">
@@ -34,7 +46,7 @@ function App() {
         <UpdatePost path='/update/:id'/>
         <CreatePost path="/review"/>
         <Registration path='/register'/> 
-        <UserPosts path='/myreviews' reviews={reviews} setReviews={setReviews}/>
+        <UserPosts path='/myreviews' userReviews={userReviews} setUserReviews={setUserReviews}/>
       </Router>
       <Footer/>
     </div>

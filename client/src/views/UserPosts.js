@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import GetAllUserReviews from '../components/GetAllUserReviews';
 
 const UserPosts = (props) => {
-    const {reviews, setReviews} = props;
+    const {userReviews, setUserReviews} = props;
 
   return (
     <HomeContainer>
@@ -11,7 +11,7 @@ const UserPosts = (props) => {
                 <h3>My Reviews</h3>
             </div>
             <hr/>
-        <GetAllUserReviews reviews={reviews} setReviews={setReviews}/>
+        <GetAllUserReviews userReviews={userReviews} setUserReviews={setUserReviews}/>
     </HomeContainer>
   )
 }
