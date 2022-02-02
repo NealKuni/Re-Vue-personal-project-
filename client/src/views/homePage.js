@@ -8,27 +8,16 @@ const HomePage = (props) => {
     const {reviews, setReviews} = props;
      
     return (
-        <Container>
+        <div>
             <div style={{color: "#7393B3"}} className='container'>
                 <h3>Revues From Around the Globe</h3>
             </div>
             <hr/>
-            
             <GetAllReviews reviews={reviews} setReviews={setReviews}/>
-        </Container>
+        </div>
         
     )
 }
 
 export default HomePage;
 
-const Container = styled.div`
-    margin: 7rem 0;
-    font-family: 'Poppins', sans-serif;
-    
-    img {
-        width: 2rem;
-        display: block;
-        margin: 0 auto;
-    }
-`;
