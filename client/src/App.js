@@ -25,8 +25,9 @@ function App() {
             console.log(err);
         })
 }, [])
+
 useEffect(()=>{
-  axios.get('http://localhost:8000/api/review/user', null ,  {withCredentials: true})
+  axios.get('http://localhost:8000/api/review/user',  {withCredentials: true})
       .then((res) => {
           console.log(res.data)
           setUserReviews(res.data);

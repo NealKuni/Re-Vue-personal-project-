@@ -3,19 +3,19 @@ import axios from 'axios';
 import { navigate, Link } from '@reach/router';
 
 
-const GetAllReviews = () => {
-
-    const [allReviews, setAllReviews] = useState([])
-    useEffect(()=>{
-        axios.get('http://localhost:8000/api')
-            .then((res) => {
-                console.log(res.data)
-                setAllReviews(res.data);
-            })
-            .catch((err) =>{ 
-                console.log(err);
-            })
-    }, [])
+const GetAllReviews = (props) => {
+    const { reviews } = props;
+    const [allReviews, setAllReviews] = useState(reviews)
+    // useEffect(()=>{
+    //     axios.get('http://localhost:8000/api')
+    //         .then((res) => {
+    //             console.log(res.data)
+    //             setAllReviews(res.data);
+    //         })
+    //         .catch((err) =>{ 
+    //             console.log(err);
+    //         })
+    // }, [])
 
     return(
         <div className='container'>
