@@ -6,6 +6,10 @@ require('dotenv').config();
 const cookieParser = require('cookie-parser');
 const multer = require("multer");
 const bodyParser = require('body-parser');
+app.use(express.static(path.join(__dirname, 'build')));
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  });
 
 
 
