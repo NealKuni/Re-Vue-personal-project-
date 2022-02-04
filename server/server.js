@@ -6,7 +6,7 @@ require('dotenv').config();
 const cookieParser = require('cookie-parser');
 const multer = require("multer");
 const bodyParser = require('body-parser');
-
+const port = 8000
 
 
 
@@ -24,6 +24,6 @@ require('./config/mongoose.config')(process.env.ATLAS_URI);
 require('./routes/user.routes')(app);
 require('./routes/review.routes')(app);
     
-app.listen(process.env.DB_PORT, '0.0.0.0',
-    () => console.log(`Listing on port ${process.env.DB_PORT}`) );
+app.listen(port, '0.0.0.0',
+    () => console.log(`Listing on port ${port}`) );
 
