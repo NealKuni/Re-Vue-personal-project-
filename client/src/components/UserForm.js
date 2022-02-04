@@ -25,10 +25,7 @@ const UserForm = (props) => {
             confirmPassword
         }
         axios.post('http://localhost:8000/api/users/register', 
-        newUser,
-        {
-          withCredentials: true
-        })
+        newUser )
       
           .then((res) =>{
               console.log(newUser)
@@ -51,7 +48,7 @@ const UserForm = (props) => {
           })
           .catch((err) => {
               console.log(err);
-              console.log(err.response.data.errors);
+              console.log(err.response.data);
               if (err.response.data.errors) {
                   setErrors(err.response.data.errors);
               } 

@@ -1,10 +1,24 @@
-import React from 'react'
+import React, {useState, useEffect } from 'react'
+import axios from 'axios';
 import styled from 'styled-components';
 import GetAllUserReviews from '../components/GetAllUserReviews';
 
-const UserPosts = (props) => {
-    const {userReviews, setUserReviews} = props;
 
+const UserPosts = (props) => {
+    
+    const [userReviews, setUserReviews ] = useState([]);
+
+    useEffect(()=>{
+        axios.get('http://localhost:8000/api/review/user',  {withCredentials: true})
+            .then((res) => {
+                console.log(res.data)
+                setUserReviews(res.data);
+            })
+            .catch((err) =>{ 
+                console.log(err);
+            })
+      }, [])
+      
   return (
     <HomeContainer>
             <div style={{color: "#7393B3"}} className='container'>
