@@ -18,16 +18,18 @@ const CreatePost = () => {
     const onSubmitHandler = (e) =>{
         e.preventDefault();
 
-        const formData = new FormData();
+        // const formData = new FormData();
 
-        formData.append("title", title);
-        formData.append("location", location);
-        formData.append("review", review);
-        formData.append("image", image);
+        // formData.append("title", title);
+        // formData.append("location", location);
+        // formData.append("review", review);
+        // formData.append("image", image);
 
 
         axios.post('http://localhost:8000/api/review/post', 
-            formData,
+            title,
+            location,
+            review,
         {
             withCredentials: true
         })
@@ -83,7 +85,7 @@ const CreatePost = () => {
                     }
                 </div>  
                     
-                <div className="mb-3">
+                {/* <div className="mb-3">
                     <label className="form-label">Upload Photos</label>
                     <input className="form-control form-control-sm" type="file" name="image" onChange = { onChangeImage }/>
                     {
@@ -91,7 +93,7 @@ const CreatePost = () => {
                         <p className="text-danger" > {errors.image.message} </p>
                         : null
                     }
-                </div>
+                </div> */}
                 <button type="submit" className="btn btn-primary">Submit Review</button>
             </form>
         </div>

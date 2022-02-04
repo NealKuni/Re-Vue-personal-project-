@@ -14,19 +14,17 @@ module.exports = {
             title: req.body.title,
             location: req.body.location,
             review: req.body.review,
-            image: req.file.originalname,
+            
             createdBy: userId
         })
         
-        // newReview.createdBy = userId;
-        console.log(`image uploaded: ${req.image}`)
+     
         console.log(newReview)
 
         newReview.save()
             .then((review) => {
                 console.log(review)
                 res.json({
-                    review: review.image,
                     message: "Successfuly created post"
                 })
             })
@@ -92,7 +90,7 @@ module.exports = {
                 updatedReview.title = req.body.title;
                 updatedReview.location = req.body.location;
                 updatedReview.review = req.body.review;
-                updatedReview.image = req.file.originalname;
+               
 
                 updatedReview.save()
                 .then(() => {
