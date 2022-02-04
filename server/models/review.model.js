@@ -10,7 +10,9 @@ const ReviewSchema = new mongoose.Schema({
          required: [true, "Location is required"] },
     review: {
          type: String, 
-         required: [true, "Review is required"] },  
+         required: [true, "Review is required"] },
+    image: {
+         type: String },  
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
