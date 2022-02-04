@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 // const uri = process.env.ATLAS_URI;
 
 module.exports = () => {
-    mongoose.connect( 'mongodb://localhost/revue', { 
+    mongoose.connect( 'mongodb://localhost/reVue', { 
         useNewUrlParser: true, 
         useUnifiedTopology: true
         
