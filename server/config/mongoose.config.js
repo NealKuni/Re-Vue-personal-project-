@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-const uri = process.env.ATLAS_URI;
+// const uri = process.env.ATLAS_URI;
 
 module.exports = () => {
-    mongoose.connect( uri, { 
+    mongoose.connect( 'mongodb://localhost/revue', { 
         useNewUrlParser: true, 
         useUnifiedTopology: true
         
@@ -15,8 +15,5 @@ module.exports = () => {
 
 }
 
-const connection = mongoose.connection;
-connection.once("open", () => 
-console.log("MongoDB connnection established successfully")
-);
+
 
