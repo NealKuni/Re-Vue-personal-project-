@@ -12,7 +12,8 @@ const ReviewSchema = new mongoose.Schema({
          type: String, 
          required: [true, "Review is required"] },
     image: {
-         type: String },  
+         type: String, 
+         required: [true, "One photo is required"] },  
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
