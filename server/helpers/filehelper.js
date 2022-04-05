@@ -2,6 +2,7 @@ const multer = require('multer');
 const path = require('path');
 
 const storage = multer.diskStorage({
+    // instead of using diskStorage, I should try memoryStorage
     destination: (req, file, cb) => {
         cb(null, '../client/public/uploads');
     },
